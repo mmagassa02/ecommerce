@@ -28,15 +28,14 @@
                 <a class="nav-link" href="#" id="cat3">Basket-ball</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" id="cart" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#cart"><i class="bi bi-cart"></i> Mon Panier</a>
+                <a class="nav-link" id="cart" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target=".cart"><i class="bi bi-cart"></i> Mon Panier</a>
             </li>
           </ul>
 
 
        <section id="articlelist">
-          <div class="container">
-              <div class="row d-flex justify-content-center" id="article-cardgroup">
-                  <div class="col-md-6 col-lg-3">
+               <div class="row d-flex justify-content-center" id="article-cardgroup">
+                  <!-- <div class="col-md-6 col-lg-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="img/articles/tennis1.jpg" alt="Card image cap"> 
                         <div class="card-body text-left">
@@ -53,33 +52,31 @@
                             <button type="button" class="btn btn-warning btn-sm">Ajouter au panier</button>
                         </div>
                       </div>
-                  </div>
-              </div>
-          </div>  
+                  </div> -->
+              </div> 
       </section> 
     </div>
 
       <!-- Modal du panier-->
-      <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+     <div class="modal cart" tabindex="-1" role="dialog" id="modalcart">
+      <!--  <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Votre panier</h5>
+              <h5 class="modal-title">Votre panier</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Liste des produits selectionnés et total ici.
+              <p>Modal body text goes here.</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Continuer mes achats</button>
-              <button type="button" class="btn btn-primary">Valider mon panier</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+              <button type="button" class="btn btn-primary">Valider le panier</button>
             </div>
           </div>
         </div>
-      </div>
-
+      </div> -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
