@@ -73,16 +73,17 @@ function displayCart(){
 }
 
 
-//Pour mettre des produits dans un tableau
+//Pour mettre des produits dans un tableau et dans le local storage
 function sendproduct(){
     createProduct('Maillot Home PSG 21-22', './img/products/maillot1.jpg','Maillot psg utilisé saison 2021-2022','1','90.00');
-    createProduct('Maillot Pays-bas domicile', './img/products/maillot2.jpg','Maillot domicile de l\'équipe nationale des Pays-Bas','1','90.00');
+    createProduct('Maillot de basketball homme Lebron James Lakers Icon Edition 20', './img/products/basketball1.jpg','Maillot Lebron James Lakers','3','89.99');
     createProduct('Maillot Exterieur Boca juniors', './img/products/maillot3.jpg','Maillot utilisé généralement par Boca uniors lors de ses déplacements','1','90.00');
-    //createProduct('Maillot Third Liverpool 21-22', '/products/maillot4.jpg','Maillot Third de Liverpool pour les campagnes européennes','1','90.00');
+    createProduct('Raquette de tennis cordée adulte Spark Elite JAUNE HEAD', './img/products/tennis2.jpg','La SPARK ELITE est un choix idéal pour faire ses premiers pas sur le court.','2','55.99');
     createProduct('Maillot Home Inter 21-22', './img/products/maillot5.jpg','Maillot domicile de l\'Inter Milan pour la saison 2021-2022','1','90.00');
     createProduct('Crampons Adidas Nemeziz Messi', './img/products/crampons1.jpg','Paire de crampons Adidas Nemeziz','1','114.99');
+    
     createProduct('Raquettte de Tennis cordée adulte PRO STAFF TEAM Wilson', './img/products/raquette.jpg','Raquette destinée aux joueurs Intermédiaire recherchant précision et confort','2','159.99');
-    createProduct('Adidas Nemeziz Messi', './img/products/crampons1.jpg','Paire de crampons Adidas Nemeziz','1','114.99');
+    createProduct('Maillot de basketball Bulls Icon Edition NIKE', './img/products/basketball2.jpg','Le maillot d\'équipe Icon Edition des Bulls','3','89.99');
     
 
     localStorage.setItem('products',JSON.stringify(tabProducts));
