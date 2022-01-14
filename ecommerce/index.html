@@ -31,80 +31,33 @@
                 <a class="nav-link" id="cart" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#cart"><i class="bi bi-cart"></i> Mon Panier</a>
             </li>
           </ul>
-      </div>
 
 
-       <section id="productlist">
+       <section id="articlelist">
           <div class="container">
-              <div class="row d-flex justify-content-center" id="product-cardgroup">
-                  <!--<div class="col-md-6 col-lg-3">
+              <div class="row d-flex justify-content-center" id="article-cardgroup">
+                  <div class="col-md-6 col-lg-3">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="img/products/maillot1.jpg" alt="Card image cap"> 
-                        <div class="card-body">
+                        <img class="card-img-top" src="img/articles/tennis1.jpg" alt="Card image cap"> 
+                        <div class="card-body text-left">
                             <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                            <p class="card-text">Description du produit ici</p>
+                            <p class="card-price">90.00€</p>
+                            <select name="quantity" id="article-quantity">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                            <button type="button" class="btn btn-warning btn-sm">Ajouter au panier</button>
                         </div>
                       </div>
                   </div>
-                  <div class="col-md-6 col-lg-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="img/products/maillot3.jpg" alt="Card image cap"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-lg-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="img/products/raquette.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-lg-3">
-                    <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="img/products/nemeziz Messi.jpg" alt="Card image cap"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-lg-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="img/products/maria-19-raquette-tennis-fille_1.jpg" alt="Card image cap"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-lg-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="img/products/balle-moyenne-babolat-play-jumbo.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom produit</h5>
-                          <p class="card-text">Description du produit ici</p>
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
-                        </div>
-                      </div>
-                  </div>-->
               </div>
-
-          </div>
-              </div>
-          </div>
+          </div>  
       </section> 
-
-
+    </div>
 
       <!-- Modal du panier-->
       <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

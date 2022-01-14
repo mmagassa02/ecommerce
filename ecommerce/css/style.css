@@ -11,28 +11,37 @@ body {
 
 
 
-/* Produits */
+/* Articles */
 
 .card{
-    max-width: 250px;
+    max-width: 230px;
     margin-bottom: 50px;
     border: none;
     height: 400px;
 }
 
 .card-title{
-    font-size: 20px;
+    margin: -3px 0px 0px 0px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-price{
+    margin-top: -5px;
 }
 
 .card-img-top{
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
+}
+.card:hover{
+    transform: scale(1.1, 1.1);
 }
 
 .card-text{
     font-size: 12px;
 }
-
+/*
 .card-body{
-    height: 200px;;
-}
+    max-height: 200px;
+}*/
