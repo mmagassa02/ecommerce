@@ -7,12 +7,153 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/ecommerce.js"></script>
-    <title>Hello, world!</title>
+    <script src="js/product.js" defer></script>
+    <title>E-Commerce</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+      <div class="container">
+        <ul class="nav nav-pills nav-fill mb-5">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="cat1">Football</a>
+            </li>
+            <li class="nav-item" id="cat2">
+              <a class="nav-link" href="#" id="cat2">Tennis</a>
+            </li>
+            <li class="nav-item" id="cat3">
+                <a class="nav-link" href="#" id="cat3">Basket-ball</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" id="cart" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#cart"><i class="bi bi-cart"></i> Mon Panier</a>
+            </li>
+          </ul>
+      </div>
+
+
+       <section id="productlist">
+          <div class="container">
+              <div class="row d-flex justify-content-center" id="product-cardgroup">
+                  <!--<div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/products/maillot1.jpg" alt="Card image cap"> 
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/products/maillot3.jpg" alt="Card image cap"> 
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/products/raquette.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                      <img class="card-img-top" src="img/products/nemeziz Messi.jpg" alt="Card image cap"> 
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/products/maria-19-raquette-tennis-fille_1.jpg" alt="Card image cap"> 
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/products/balle-moyenne-babolat-play-jumbo.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Nom produit</h5>
+                          <p class="card-text">Description du produit ici</p>
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Ajouter au panier</button>
+                        </div>
+                      </div>
+                  </div>-->
+              </div>
+
+          </div>
+              </div>
+          </div>
+      </section> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Modal du panier-->
+      <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Votre panier</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Liste des produits selectionnés et total ici.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Continuer mes achats</button>
+              <button type="button" class="btn btn-primary">Valider mon panier</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
