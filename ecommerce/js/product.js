@@ -197,15 +197,15 @@ document.addEventListener('click', event =>{
         displayArticles();
     }
     if(event.target.matches('#cat1')){
-        console.log('Catégorie 1');
+        console.log('Affichage des articles de la catégorie football');
         displayArticles(1)
     }
     if(event.target.matches('#cat2')){
-        console.log('Catégorie 2');
+        console.log('Affichage des articles de la catégorie tennis');
         displayArticles(2);
     }
     if(event.target.matches('#cat3')){
-        console.log('Catégorie 3');
+        console.log('Affichage des articles de la catégorie basketball');
         displayArticles(3);
     }
     if(event.target.matches('#cart')){
