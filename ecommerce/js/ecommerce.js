@@ -117,38 +117,6 @@ function addToCart(articleindex, quantity){
 }
 
 
-//Debut design modal
-function getcartstyle(){
-    return `
-    
-    <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Votre panier</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    <table class="table">
-    <thead><tr>
-    <th scope="col">#</th>
-    <th scope="col">Intitule</th>
-    <th scope="col">Quantité</th>
-    <th scope="col">Prix</th>
-    </tr>
-    `;
-}
-
-//Fin du design du modal
-function getendcartstyle(){
-    return `
-    <div><div class="modal-footer">
-    <button type="button" class="btn btn-primary">Valider le panier</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
-    </div></div></div></div>
-    `;
-}
 
 //Affichage du panier
 
@@ -213,6 +181,12 @@ function sendArticle(){
 }
 
 
+/*
+        Getters
+*/
+
+
+
 
 // retourne la liste des produits initialement sous format JSON
 function getArticles(){
@@ -228,6 +202,38 @@ function getCart(){
 }
 
 
+//Debut design modal
+function getcartstyle(){
+    return `
+    
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Votre panier</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    <table class="table">
+    <thead><tr>
+    <th scope="col">#</th>
+    <th scope="col">Intitule</th>
+    <th scope="col">Quantité</th>
+    <th scope="col">Prix</th>
+    </tr>
+    `;
+}
+
+//Fin du design du modal
+function getendcartstyle(){
+    return `
+    <div><div class="modal-footer">
+    <button type="button" class="btn btn-primary">Valider le panier</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+    </div></div></div></div>
+    `;
+}
 
 
 
