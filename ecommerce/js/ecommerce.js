@@ -169,7 +169,8 @@ function displayCart()
                             <option value="4">4</option>
                             <option value="5">5</option>
                             </select>${article.quantity}</td>
-                            <td>${parseFloat(article.quantity*article.price).toFixed(2)}€</td></tr>
+                            <td>${parseFloat(article.quantity*article.price).toFixed(2)}€</td>
+                            <td><i class="bi bi-trash" data-index="${articleindex}"></i></td></tr>
                             `
                             total = parseFloat(total);
                             console.log(`l175 ${typeof total}`)
@@ -181,7 +182,7 @@ function displayCart()
        
         cartstyle +=`    <tr>
                     <th scope="row">Total</th>
-                    <td>${parseFloat(total)}€</td>
+                    <td>${total.toFixed(2)}€</td>
                     </tr>`
                     cartstyle += getendcartstyle();
         document.getElementById("modalcart").innerHTML = cartstyle;
@@ -189,27 +190,32 @@ function displayCart()
         for (const article of document.getElementsByClassName("article-quantity")) 
         {
             article.addEventListener("change", event=>{
-                console.log(event);
                 for (const articleindex of cart.keys())
                 {
      
                         if(event.path[0].dataset.id == articleindex)
                         {
-                            if(event.target.options[event.target.selectedIndex].textContent == 0)
-                                cart.splice(articleindex,1);
-                            else
-                            {
                             console.log(event.target.options[event.target.selectedIndex].textContent);
                             cart[articleindex].quantity = event.target.options[event.target.selectedIndex].textContent;
-                            }
                         }
                 }
-                                        //Mise a jour du panier
-                                        localStorage.setItem("cart",JSON.stringify(cart)); 
-                                        displayCart();
+                //Mise a jour du panier
+                localStorage.setItem("cart",JSON.stringify(cart)); 
+                displayCart();
 
             })    
         }
+        /*
+        for (const index of document.getElementsByClassName("bi-trash")) {
+            index.addEventListener("click", event=>{
+                cart.splice(event.target.dataset.index,1)
+            })
+        }
+        localStorage.setItem("cart",JSON.stringify(cart)); 
+        displayCart();*/
+
+
+        
 
     }
 
