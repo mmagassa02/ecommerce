@@ -19,7 +19,8 @@ function createArticle(nameArticle, imgArticle, description, category, price)
 }
 
 // Création d'un objet représentant un article pour le panier
-function createCartArticle(nameArticle, imgArticle, price, quantity){
+function createCartArticle(nameArticle, imgArticle, price, quantity)
+{
 
     const articleforcart = {
         'name' : nameArticle,
@@ -92,30 +93,33 @@ function displayArticles(cat = 0)
     }
 
     document.addEventListener("click", event =>{
-        if(event.target.matches(".addtocart")){
-            addToCart(event.target.dataset.id, document.getElementsByClassName("article-quantity")); //Corriger plus tard
+        if(event.target.matches(".addtocart"))
+        {
+            addToCart(event.target.dataset.id, document.getElementsByClassName("article-quantity")); 
         }
     })
 }
 
 
 //Pour ajouter des articles au panier 
-function addToCart(articleindex, htmlelement){
+function addToCart(articleindex, htmlelement)
+{
     let isincart = false;
-    let quantity;
-
+    let quantity = 0;
+    console.log(htmlelement);
     for (const element of htmlelement) {
+        console.log(element)
         if(element.dataset.id == articleindex){
             quantity = element.options[element.selectedIndex].textContent;
-            console.log(quantity);
-            console.log(element)
         }
 
     }
 
 
-  for (const [index,article] of cart.entries()) {
-    if(index == articleindex){
+  for (const [index,article] of cart.entries()) 
+  {
+    if(index == articleindex)
+    {
         cart[index].quantity = parseInt(cart[index].quantity);
         console.log("article = articleindex")
         cart[index].quantity += parseInt(quantity);// On ajoute la quantité
@@ -125,6 +129,7 @@ function addToCart(articleindex, htmlelement){
         isincart = true  
     }
   }
+  //L'article n'etait pas présent dans le panier
     if(!isincart)
         createCartArticle(tabArticles[articleindex].name, tabArticles[articleindex].image, tabArticles[articleindex].price, quantity);
 
@@ -136,65 +141,80 @@ function addToCart(articleindex, htmlelement){
 
 //Affichage du panier
 
-function displayCart(){
+function displayCart()
+{
 
     cart = getCart(); //Recuperation dans le localstorage du panier
-    //somme a 0 et calcul ici ou fonction qui retourne la somme en la modifiant (addition soustraction etc).
-   let cartstyle ='', somme = 0;
-    if(cart.length == 0){
+    //total a 0 et calcul ici ou fonction qui retourne la total en la modifiant (addition soustraction etc).
+   let cartstyle ='', total = 0;
+   total = parseFloat(total);
+   console.log(`l151 ${typeof total}`)
+    if(cart.length == 0)
+    {
         alert("Votre panier est vide");
     }else
     {
-        console.log(cart)
         //Début 
         cartstyle = getcartstyle(); //On récupere le style du panier
-        for (const [articleindex,article] of cart.entries()){
+        for (const [articleindex,article] of cart.entries())
+        {
             cartstyle += `<tr>
                             <th scope="row"><img src="${article.image}" alt="" class="articlecart"></th>
                             <td>${article.name}</td>
                             <td><select name="quantity" class="article-quantity" data-id="${articleindex}">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             </select>${article.quantity}</td>
-                            <td>${(article.quantity*article.price).toFixed(2)}€</td></tr>
+                            <td>${parseFloat(article.quantity*article.price).toFixed(2)}€</td></tr>
                             `
-                            somme += (parseFloat(article.quantity*article.price));
+                            total = parseFloat(total);
+                            console.log(`l175 ${typeof total}`)
+                            total += parseFloat(article.quantity)*article.price;
+                            console.log(total)
         }
 
         // Fin du modal
        
         cartstyle +=`    <tr>
                     <th scope="row">Total</th>
-                    <td>${somme}€</td>
+                    <td>${parseFloat(total)}€</td>
                     </tr>`
                     cartstyle += getendcartstyle();
         document.getElementById("modalcart").innerHTML = cartstyle;
-
- /*       document.addEventListener("change", event =>{
-            if(event.target.matches())
-        })*/
         cartstyle = '';
-}
-    for (const article of document.getElementsByClassName("article-quantity")) {
-        article.addEventListener("change", event=>{
-            console.log(event);
-            for (const articleindex of cart.keys()){
- 
-                    if(event.path[0].dataset.id == articleindex){
-                        addToCart(articleindex, event.path[0]);
-                    }
-            
-                    console.log(event.path[0].dataset.id == articleindex);
-                    console.log(articleindex)
-                
-                
-            }
-        displayCart();
-        })    
+        for (const article of document.getElementsByClassName("article-quantity")) 
+        {
+            article.addEventListener("change", event=>{
+                console.log(event);
+                for (const articleindex of cart.keys())
+                {
+     
+                        if(event.path[0].dataset.id == articleindex)
+                        {
+                            if(event.target.options[event.target.selectedIndex].textContent == 0)
+                                cart.splice(articleindex,1);
+                            else
+                            {
+                            console.log(event.target.options[event.target.selectedIndex].textContent);
+                            cart[articleindex].quantity = event.target.options[event.target.selectedIndex].textContent;
+                            }
+                        }
+                }
+                                        //Mise a jour du panier
+                                        localStorage.setItem("cart",JSON.stringify(cart)); 
+                                        displayCart();
+
+            })    
+        }
+
     }
+
+
+
 
 }
 
@@ -217,7 +237,7 @@ function sendArticle(){
 
 
 /*
-        Getters
+        Get
 */
 
 
