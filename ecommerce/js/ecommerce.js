@@ -27,7 +27,6 @@ function createCartArticle(nameArticle, imgArticle, price, quantity){
         'price': price,
         'quantity': quantity
     } 
-    console.log(articleforcart);
     cart.push(articleforcart);
 }
 
@@ -39,10 +38,11 @@ function displayArticles(cat = 0)
     const articletab = getArticles();
     let articlecard ='<div class="card-group">';
     if(!articletab.length){
-        console.log("Aucun produit n'est disponible");
+        alert("Aucun produit n'est disponible");
     }
     for (const [articleindex,article] of articletab.entries()) {
 
+        const btn = `<button type="button" class="btn btn-warning btn-sm addtocart" data-id="${articleindex}">Ajouter au panier</button>`;
         //On affiche les produits correspondant à la categorie choisie (transmise en paramètre).
         if(article.categorie == cat){
                     //On créé les cards pour afficher les produits  et leurs informations dedans.
@@ -63,7 +63,6 @@ function displayArticles(cat = 0)
                               </select>
                               <button type="button" class="btn btn-warning btn-sm" data-id="${articleindex}">Ajouter au panier</button>
                                 `;
-                                console.log(` dans la boucle${article.price}`)
             document.getElementById('article-cardgroup').innerHTML += articlecard;
             //Le paramètre par defaut cat vaut 0 donc on affiche tous les produits
         }else if(cat == 0)
@@ -76,39 +75,56 @@ function displayArticles(cat = 0)
                             <h5 class="card-title">${article.name}</h5>
                             <p class="card-text">${article.description}</p>
                             <p class="card-price">${parseFloat(article.price)}€</p>
-                            <select name="quantity" id="article-quantity">
+                            <select name="quantity" class="article-quantity" data-id="${articleindex}">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             </select>
-                            <button type="button" class="btn btn-warning btn-sm addcart" data-id="${articleindex}">Ajouter au panier</button>
+                            ${btn}
                             `;
                                 articlecard += `</div>`;
         document.getElementById('article-cardgroup').innerHTML += articlecard;
         }
         else continue;
 
-      /*  document.addEventListener("click", event =>{
-            if(event.target.matches(articleindex))
-        })*/
-
     }
+
+    document.addEventListener("click", event =>{
+        if(event.target.matches(".addtocart")){
+            addToCart(event.target.dataset.id, document.getElementsByClassName("article-quantity")); //Corriger plus tard
+        }
+    })
 }
 
 
 //Pour ajouter des articles au panier 
-function addToCart(articleindex, quantity){
+function addToCart(articleindex, htmlelement){
     let isincart = false;
-    //On vérifie si l'article était deja prénsent dans le panier
-    cart.forEach((article,index) =>{
-        if(index == articleindex){
-            console.log("article = articleindex")
-            cart[index].quantity += quantity;// On ajoute la quantité
-            isincart = true  
+    let quantity;
+
+    for (const element of htmlelement) {
+        if(element.dataset.id == articleindex){
+            quantity = element.options[element.selectedIndex].textContent;
+            console.log(quantity);
+            console.log(element)
         }
-    })
+
+    }
+
+
+  for (const [index,article] of cart.entries()) {
+    if(index == articleindex){
+        cart[index].quantity = parseInt(cart[index].quantity);
+        console.log("article = articleindex")
+        cart[index].quantity += parseInt(quantity);// On ajoute la quantité
+        console.log(typeof cart[index].quantity)
+        console.log(typeof parseInt(quantity));
+
+        isincart = true  
+    }
+  }
     if(!isincart)
         createCartArticle(tabArticles[articleindex].name, tabArticles[articleindex].image, tabArticles[articleindex].price, quantity);
 
@@ -123,31 +139,29 @@ function addToCart(articleindex, quantity){
 function displayCart(){
 
     cart = getCart(); //Recuperation dans le localstorage du panier
-    console.log(cart);
     //somme a 0 et calcul ici ou fonction qui retourne la somme en la modifiant (addition soustraction etc).
    let cartstyle ='', somme = 0;
     if(cart.length == 0){
         alert("Votre panier est vide");
     }else
     {
+        console.log(cart)
         //Début 
-        cartstyle += getcartstyle(); //On récupere le style du panier
-        //Dans le tableau cart, les index pairs représentent la quantité et les index impairs représentent les articles ajoutés.
-        //On vérifie donc la parité pour savoir si l'ont affiche les valeurs en tant qu'article ou quantité
+        cartstyle = getcartstyle(); //On récupere le style du panier
         for (const [articleindex,article] of cart.entries()){
             cartstyle += `<tr>
                             <th scope="row"><img src="${article.image}" alt="" class="articlecart"></th>
                             <td>${article.name}</td>
-                            <td><select name="quantity" id="article-quantity">
+                            <td><select name="quantity" class="article-quantity" data-id="${articleindex}">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             </select>${article.quantity}</td>
-                            <td>${article.quantity*article.price}€</td></tr>
+                            <td>${(article.quantity*article.price).toFixed(2)}€</td></tr>
                             `
-                            somme += parseFloat(article.quantity*article.price);
+                            somme += (parseFloat(article.quantity*article.price));
         }
 
         // Fin du modal
@@ -157,13 +171,34 @@ function displayCart(){
                     <td>${somme}€</td>
                     </tr>`
                     cartstyle += getendcartstyle();
-        document.getElementById("modalcart").innerHTML += cartstyle;
+        document.getElementById("modalcart").innerHTML = cartstyle;
 
  /*       document.addEventListener("change", event =>{
             if(event.target.matches())
         })*/
         cartstyle = '';
-}}
+}
+    for (const article of document.getElementsByClassName("article-quantity")) {
+        article.addEventListener("change", event=>{
+            console.log(event);
+            for (const articleindex of cart.keys()){
+ 
+                    if(event.path[0].dataset.id == articleindex){
+                        addToCart(articleindex, event.path[0]);
+                    }
+            
+                    console.log(event.path[0].dataset.id == articleindex);
+                    console.log(articleindex)
+                
+                
+            }
+        displayCart();
+        })    
+    }
+
+}
+
+
 
 
 //Pour initialement mettre des produits dans un tableau et dans le localstorage
@@ -193,12 +228,10 @@ function getArticles(){
     return JSON.parse(localStorage.getItem("articles"));
 }
 
-/*
-Retourne le contenu du panier 
-*/
+// Retourne le contenu du panier
 function getCart(){
- //   console.log(JSON.parse(localStorage,getItem("cart")));
-    return JSON.parse(localStorage.getItem("cart"));
+
+    return JSON.parse(localStorage.getItem("cart")) ?? [];
 }
 
 
@@ -236,9 +269,6 @@ function getendcartstyle(){
 }
 
 
-
-
-
 // Partie principale
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -246,8 +276,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     sendArticle();
     //On affiche initialement tous les produits du site
     displayArticles();
-    addToCart(1,4); //test
-    addToCart(2,3);
+   // addToCart(1,4); //test
+   // addToCart(2,3);
 
 });
 
