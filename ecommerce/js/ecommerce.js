@@ -35,11 +35,11 @@ function createCartArticle(nameArticle, imgArticle, price, quantity)
 // Affichage des produits du site
 function displayArticles(cat = 0)
 {
-    document.getElementById('article-cardgroup').innerHTML = '';
+    let cardgroup=document.getElementById('article-cardgroup').innerHTML = '';
     const articletab = getArticles();
     let articlecard ='<div class="card-group">';
     if(!articletab.length){
-        alert("Aucun produit n'est disponible");
+        cardgroup.innerHTML = 'Panier vide';
     }
     for (const [articleindex,article] of articletab.entries()) {
 
@@ -106,25 +106,19 @@ function addToCart(articleindex, htmlelement)
 {
     let isincart = false;
     let quantity = 0;
-    console.log(htmlelement);
     for (const element of htmlelement) {
-        console.log(element)
         if(element.dataset.id == articleindex){
             quantity = element.options[element.selectedIndex].textContent;
         }
 
     }
 
-
   for (const [index,article] of cart.entries()) 
   {
     if(index == articleindex)
     {
         cart[index].quantity = parseInt(cart[index].quantity);
-        console.log("article = articleindex")
         cart[index].quantity += parseInt(quantity);// On ajoute la quantité
-        console.log(typeof cart[index].quantity)
-        console.log(typeof parseInt(quantity));
 
         isincart = true  
     }
@@ -137,18 +131,14 @@ function addToCart(articleindex, htmlelement)
     localStorage.setItem("cart",JSON.stringify(cart));
 }
 
-
-
 //Affichage du panier
 
 function displayCart()
 {
-
     cart = getCart(); //Recuperation dans le localstorage du panier
     //total a 0 et calcul ici ou fonction qui retourne la total en la modifiant (addition soustraction etc).
    let cartstyle ='', total = 0;
    total = parseFloat(total);
-   console.log(`l151 ${typeof total}`)
     if(cart.length == 0)
     {
         alert("Votre panier est vide");
@@ -173,11 +163,8 @@ function displayCart()
                             <td><i class="bi bi-trash" data-index="${articleindex}"></i></td></tr>
                             `
                             total = parseFloat(total);
-                            console.log(`l175 ${typeof total}`)
                             total += parseFloat(article.quantity)*article.price;
-                            console.log(total)
         }
-
         // Fin du modal
        
         cartstyle +=`    <tr>
@@ -195,7 +182,6 @@ function displayCart()
      
                         if(event.path[0].dataset.id == articleindex)
                         {
-                            console.log(event.target.options[event.target.selectedIndex].textContent);
                             cart[articleindex].quantity = event.target.options[event.target.selectedIndex].textContent;
                         }
                 }
@@ -203,32 +189,26 @@ function displayCart()
                 localStorage.setItem("cart",JSON.stringify(cart)); 
                 displayCart();
 
-            })    
+            })  
+
         }
-        /*
-        for (const index of document.getElementsByClassName("bi-trash")) {
-            index.addEventListener("click", event=>{
-                cart.splice(event.target.dataset.index,1)
+        for (const element of document.getElementsByClassName("bi-trash")) {
+            element.addEventListener("click", event =>{
+
+                cart.splice(event.target.dataset.index,1);
+                console.log(event.target.dataset.index);
+                localStorage.setItem("cart",JSON.stringify(cart)); 
+                displayCart();
             })
+
+            
         }
-        localStorage.setItem("cart",JSON.stringify(cart)); 
-        displayCart();*/
-
-
-        
-
     }
-
-
-
 
 }
 
-
-
-
 //Pour initialement mettre des produits dans un tableau et dans le localstorage
-function sendArticle(){
+function addArticles(){
     createArticle('Maillot Home PSG 21-22', './img/articles/maillot1.jpg','Maillot psg utilisé saison 2021-2022','1','90.00');
     createArticle('Maillot de basketball Lebron James Lakers Icon Edition 20', './img/articles/basketball1.jpg','Maillot Lebron James Lakers','3','89.99');
     createArticle('Maillot Exterieur Boca juniors', './img/articles/maillot3.jpg','Maillot de Boca juniors lors de ses déplacements','1','90.00');
@@ -245,8 +225,6 @@ function sendArticle(){
 /*
         Get
 */
-
-
 
 
 // retourne la liste des produits initialement sous format JSON
@@ -294,12 +272,11 @@ function getendcartstyle(){
     `;
 }
 
-
 // Partie principale
 
 document.addEventListener('DOMContentLoaded', ()=>{
     
-    sendArticle();
+    addArticles();
     //On affiche initialement tous les produits du site
     displayArticles();
    // addToCart(1,4); //test
@@ -312,15 +289,14 @@ document.addEventListener('click', event =>{
         displayArticles();
     }
     if(event.target.matches('#cat1')){
-        console.log('Affichage des articles de la catégorie football');
+
         displayArticles(1)
     }
     if(event.target.matches('#cat2')){
-        console.log('Affichage des articles de la catégorie tennis');
         displayArticles(2);
     }
     if(event.target.matches('#cat3')){
-        console.log('Affichage des articles de la catégorie basketball');
+
         displayArticles(3);
     }
     if(event.target.matches('#cart')){
